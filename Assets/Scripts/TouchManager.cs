@@ -13,6 +13,8 @@ public class TouchManager : MonoBehaviour
     private InputAction _touchPositionAction;
     private InputAction _touchPressAction;
 
+    [SerializeField] CannonMovement _cannonMovement;
+
     private void Awake()
     {
         _playerInput = GetComponent<PlayerInput>();
@@ -41,7 +43,7 @@ public class TouchManager : MonoBehaviour
 
         Vector3 wordPosition = _mainCamera.ScreenToWorldPoint(position);
         wordPosition.z = 0;
-
-        Debug.Log(wordPosition);
+        
+        _cannonMovement.Rotate(wordPosition);
     }
 }
