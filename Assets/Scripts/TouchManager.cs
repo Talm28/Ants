@@ -18,6 +18,8 @@ public class TouchManager : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = 60; // TODO - move it to diferent location
+
         _playerInput = GetComponent<PlayerInput>();
 
         _mainCamera = Camera.main;
