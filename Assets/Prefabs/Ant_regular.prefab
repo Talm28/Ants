@@ -101,6 +101,7 @@ MonoBehaviour:
   _speed: {x: 0.5, y: 2}
   _noiseScaleMax: 50
   _size: {x: 0.8, y: 1.2}
+  _stopTime: {x: 0.5, y: 2}
 --- !u!70 &6357936502783727495
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
