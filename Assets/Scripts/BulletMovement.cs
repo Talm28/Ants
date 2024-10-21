@@ -46,15 +46,4 @@ public class BulletMovement : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-
-
-    // TODO - move this to other script!!!
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if(other.gameObject.tag == "Ant")
-        {
-            Destroy(other.gameObject);
-            Destroy(this.gameObject);
-        }
-    }
 }

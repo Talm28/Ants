@@ -1,44 +1,68 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AntMovement : MonoBehaviour
 {
-    [SerializeField] private Vector2 _speed;
-    [SerializeField] float _noiseScaleMax;
-    [SerializeField] private Vector2 _size;
-    [SerializeField] private Vector2 _stopTime;
+    [SerializeField] private Vector2 _speedRange;
+    [SerializeField] private Vector2 _noiseScaleRange;
+    [SerializeField] private Vector2 _sizeRange;
+    [SerializeField] private Vector2 _stopTimeRange;
 
+    public Vector3 startPos;
+
+    private AntSpawner _antSpawner;
     private float _currSpeed;
     private Vector3 _target;
+    private GameObject _targetGameObject;
     private float _noiseYValue;
     private float _timer;
     private float _stopAndTimer;
     private bool _canMove;
     private bool _isStopped;
+    private bool _isWondering;
+    private float _noiseScaleMax;
     private float _noiseScale;
     private float _maxDisntance;
-
-
 
     void Awake()
     {
         _canMove = false;
+        _antSpawner = GameObject.FindGameObjectWithTag("AntSpawner").GetComponent<AntSpawner>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        _currSpeed = Random.Range(_speed.x, _speed.y);
+        _currSpeed = Random.Range(_speedRange.x, _speedRange.y);
 
         _noiseYValue = Random.Range(0f, 1000f);
+
+        _noiseScaleMax = Random.Range(_noiseScaleRange.x, _noiseScaleRange.y);
 
         _timer = 0;
         _stopAndTimer = 0;
 
-        float size = Random.Range(_size.x, _size.y);
+        float size = Random.Range(_sizeRange.x, _sizeRange.y);
         transform.localScale = new Vector3(size, size, size);
 
         _isStopped = false;
+
+        _isWondering = true;
+
+        startPos = transform.position;
+    }
+
+    void OnDisable()
+    {
+        // Remove ant from events
+        _antSpawner.onCakePoolRefill.RemoveListener(DeactiveWondering);
+
+        if(_targetGameObject != null)
+        {
+             CakeController cakeController = _targetGameObject.GetComponent<CakeController>();
+            if(cakeController != null) cakeController.onCakeTook.AddListener(ActiveWondering);
+        }
     }
 
     // Update is called once per frame
@@ -49,6 +73,10 @@ public class AntMovement : MonoBehaviour
         if(_canMove)
         {
             Rotate(_target);
+
+            if(_isWondering)
+                AntWondering();
+
             if(! _isStopped)
                 Movement();
                 
@@ -56,14 +84,22 @@ public class AntMovement : MonoBehaviour
         }
     }
 
-    public void SetTarget(Vector3 target)
+    public void SetTarget(Vector3 target, GameObject? targetGameObject)
     {
         target.z = 0;
 
         _target = target;
+        _targetGameObject = targetGameObject;
         _canMove = true;
+        _isWondering = false;
 
         _maxDisntance = Vector3.Distance(transform.position, target);
+
+        if(targetGameObject != null)
+        {
+            CakeController cakeController = targetGameObject.GetComponent<CakeController>();
+            if(cakeController != null) cakeController.onCakeTook.AddListener(ActiveWondering);
+        }
     }
 
     private void Movement()
@@ -115,7 +151,7 @@ public class AntMovement : MonoBehaviour
     {
         _isStopped = true;
 
-        float waitTime = Random.Range(_stopTime.x, _stopTime.y);
+        float waitTime = Random.Range(_stopTimeRange.x, _stopTimeRange.y);
 
         StartCoroutine(StopAndCoroutine(waitTime));
     }
@@ -124,4 +160,39 @@ public class AntMovement : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         _isStopped = false;
     }
+
+    private void AntWondering()
+    {
+        if(Vector3.Distance(transform.position, _target) <= 0.5f)
+            SetRandomTarget();
+    }
+
+    private void SetRandomTarget()
+    {
+        Vector3 newPos = new Vector3(Random.Range(0f,1f), Random.Range(0.2f,1f), 0);
+        newPos = Camera.main.ViewportToWorldPoint(newPos);
+        SetTarget(newPos, null);
+        _isWondering = true;
+    }
+
+    public void ActiveWondering()
+    {
+        _canMove = true;
+
+        _targetGameObject = null;
+
+        SetRandomTarget();
+
+        _antSpawner.onCakePoolRefill.AddListener(DeactiveWondering);
+    }
+
+    public void DeactiveWondering()
+    {
+        _isWondering = false;
+        
+        
+        GameObject target = _antSpawner.GetCakeTarget();
+        SetTarget(target.transform.position, target);
+    }
+
 }
