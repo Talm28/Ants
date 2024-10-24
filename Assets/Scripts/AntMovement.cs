@@ -13,24 +13,24 @@ public class AntMovement : MonoBehaviour
     public Vector3 startPos;
 
     private AntSpawner _antSpawner;
+    private AntState _antState;
     private float _currSpeed;
     private Vector3 _target;
     private GameObject _targetGameObject;
     private float _noiseYValue;
     private float _timer;
     private float _stopAndTimer;
-    private bool _canMove;
     private bool _isStopped;
-    private bool _isWondering;
     private float _noiseScaleMax;
     private float _noiseScale;
     private float _maxDisntance;
 
     void Awake()
     {
-        _canMove = false;
         _antSpawner = GameObject.FindGameObjectWithTag("AntSpawner").GetComponent<AntSpawner>();
+        _antState = GetComponent<AntState>();
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,8 +47,6 @@ public class AntMovement : MonoBehaviour
         transform.localScale = new Vector3(size, size, size);
 
         _isStopped = false;
-
-        _isWondering = true;
 
         startPos = transform.position;
     }
@@ -70,11 +68,11 @@ public class AntMovement : MonoBehaviour
     {
         _timer += Time.deltaTime;
 
-        if(_canMove)
+        if(_antState.State != MovementState.Start)
         {
             Rotate(_target);
 
-            if(_isWondering)
+            if(_antState.State == MovementState.Wondering)
                 AntWondering();
 
             if(! _isStopped)
@@ -87,19 +85,30 @@ public class AntMovement : MonoBehaviour
     public void SetTarget(Vector3 target, GameObject? targetGameObject)
     {
         target.z = 0;
-
         _target = target;
         _targetGameObject = targetGameObject;
-        _canMove = true;
-        _isWondering = false;
 
         _maxDisntance = Vector3.Distance(transform.position, target);
 
         if(targetGameObject != null)
         {
             CakeController cakeController = targetGameObject.GetComponent<CakeController>();
-            if(cakeController != null) cakeController.onCakeTook.AddListener(ActiveWondering);
+            if(cakeController != null) // If the target is Cake
+            {
+                cakeController.onCakeTook.AddListener(ActiveWondering);
+                _antState.SetState(MovementState.CakeTargeted);
+            }
         }
+    }
+
+    public void ReturnToStart(Vector3 target)
+    {
+        target.z = 0;
+        _target = target;
+
+        _maxDisntance = Vector3.Distance(transform.position, target);
+
+        _antState.SetState(MovementState.Returning);
     }
 
     private void Movement()
@@ -131,7 +140,7 @@ public class AntMovement : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
     }
 
-    private void StopGenerator()
+    protected virtual void StopGenerator()
     {
         if(_isStopped) return;
 
@@ -142,9 +151,7 @@ public class AntMovement : MonoBehaviour
             _stopAndTimer = 0;
             if(Random.Range(0,5) == 0)
                 StopAnt();
-        }
-
-        
+        }        
     }
 
     private void StopAnt()
@@ -172,25 +179,21 @@ public class AntMovement : MonoBehaviour
         Vector3 newPos = new Vector3(Random.Range(0f,1f), Random.Range(0.2f,1f), 0);
         newPos = Camera.main.ViewportToWorldPoint(newPos);
         SetTarget(newPos, null);
-        _isWondering = true;
     }
 
     public void ActiveWondering()
     {
-        _canMove = true;
-
         _targetGameObject = null;
 
         SetRandomTarget();
 
         _antSpawner.onCakePoolRefill.AddListener(DeactiveWondering);
+
+        _antState.SetState(MovementState.Wondering);
     }
 
     public void DeactiveWondering()
     {
-        _isWondering = false;
-        
-        
         GameObject target = _antSpawner.GetCakeTarget();
         SetTarget(target.transform.position, target);
     }

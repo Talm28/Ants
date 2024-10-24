@@ -45,3 +45,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ant
+    uniqueID: 840441747
+    locked: 0
+  - name: Cake
+    uniqueID: 3350621703
+    locked: 0

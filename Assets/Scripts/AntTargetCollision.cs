@@ -6,6 +6,7 @@ public class AntTargetCollision : MonoBehaviour
 {
     private AntMovement _antMovement;
     private AntDragObject _andDragObject;
+    private AntState _antState;
     private bool _tookCake;
 
     private GameObject _draggedCake;
@@ -15,6 +16,7 @@ public class AntTargetCollision : MonoBehaviour
     {
         _antMovement = GetComponent<AntMovement>();
         _andDragObject = GetComponent<AntDragObject>();
+        _antState = GetComponent<AntState>();
 
         _tookCake = false;
     }
@@ -32,10 +34,11 @@ public class AntTargetCollision : MonoBehaviour
         if(other.gameObject.tag == "Cake")
         {
             CakeController cakeController = other.gameObject.GetComponent<CakeController>();
-            if(cakeController != null && !cakeController.isTaken) // Check if the cake is avaiable and took it if so
+            if(cakeController != null && !cakeController.isTaken && _antState.State == MovementState.CakeTargeted) // Check if the cake is avaiable and took it if so
             {
+                cakeController.onCakeTook.RemoveListener(_antMovement.ActiveWondering); // Remove the current ant from cake event
                 cakeController.TakeCake();
-                _antMovement.SetTarget(_antMovement.startPos, null);
+                _antMovement.ReturnToStart(_antMovement.startPos);
                 _andDragObject.Drag(other.gameObject);
                 _draggedCake = other.gameObject;
             }

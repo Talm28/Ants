@@ -6,21 +6,20 @@ using UnityEngine;
 public class AntDragObject : MonoBehaviour
 {
     private GameObject _draggedObject;
-    private bool _isDragging;
     private AntMovement _antMovement;
+    private AntState _antState;
 
     // Start is called before the first frame update
     void Start()
     {
-        _isDragging = false;
-
         _antMovement = GetComponent<AntMovement>();
+        _antState = GetComponent<AntState>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(_isDragging)
+        if(_antState.State == MovementState.Returning)
         {
             _draggedObject.transform.position = transform.position;
             if(Vector3.Distance(_antMovement.startPos, transform.position) < 0.1f)
@@ -35,11 +34,5 @@ public class AntDragObject : MonoBehaviour
     public void Drag(GameObject draggedObject)
     {
         _draggedObject = draggedObject;
-        _isDragging = true;
-    }
-
-    public void StopDrag()
-    {
-        _isDragging = false;
     }
 }

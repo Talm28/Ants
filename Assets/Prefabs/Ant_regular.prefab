@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4118540434755222245}
   - component: {fileID: 3316188960480554435}
   - component: {fileID: 2582644621853843156}
+  - component: {fileID: 8853848475026248795}
   m_Layer: 0
   m_Name: Ant_regular
   m_TagString: Ant
@@ -75,8 +76,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 840441747
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e5c026cd5fdd841449eb6ea47911e95f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -192,3 +193,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cb0c217064cf747b385fd91187bb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8853848475026248795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3642781108012472835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370858159f043b341bbfb7b0f78f417c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateStr: 

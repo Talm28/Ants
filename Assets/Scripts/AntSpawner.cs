@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class AntSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] targetCakes = new GameObject[2];
-    [SerializeField] private GameObject[] ants = new GameObject[1];
+    [SerializeField] private GameObject[] ants = new GameObject[2];
     [SerializeField] private float _timeToSpawn;
 
     [SerializeField] private List<GameObject> _cakePool;
@@ -39,7 +39,7 @@ public class AntSpawner : MonoBehaviour
     private void SpawnAnts()
     {
         // Spawn ant in random position
-        GameObject ant = ants[Random.Range(0,1)];
+        GameObject ant = ants[Random.Range(0,ants.Length)];
         Vector3 position = _cameraMain.ViewportToWorldPoint(new Vector3(Random.Range(0f,1f), 1, 0));
         position.z = 0;
         GameObject antGameobject = Instantiate(ant, position, Quaternion.identity);

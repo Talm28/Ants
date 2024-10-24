@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _antSpawner: {fileID: 2009152468}
+  _draggedAlpha: 0.5
   onCakeTook:
     m_PersistentCalls:
       m_Calls: []
@@ -447,8 +448,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -944345593
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c02930521118b2c4386222ac40e6cc3c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -573,6 +574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _antSpawner: {fileID: 2009152468}
+  _draggedAlpha: 0.5
   onCakeTook:
     m_PersistentCalls:
       m_Calls: []
@@ -722,7 +724,8 @@ MonoBehaviour:
   - {fileID: 86465350}
   ants:
   - {fileID: 3642781108012472835, guid: 632d3ff9b4d4f964f9364dd84a1e9b69, type: 3}
-  _timeToSpawn: 1
+  - {fileID: 5209747943854629225, guid: 126845ed1483d84418b225439b015ab4, type: 3}
+  _timeToSpawn: 1.5
   _cakePool: []
   onCakePoolRefill:
     m_PersistentCalls:
@@ -797,8 +800,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -944345593
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c02930521118b2c4386222ac40e6cc3c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
