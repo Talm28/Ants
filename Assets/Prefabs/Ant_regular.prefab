@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6492707038121578756}
   - component: {fileID: 823726783565643092}
   - component: {fileID: 4118540434755222245}
+  - component: {fileID: 8810058064910811694}
   - component: {fileID: 3316188960480554435}
   - component: {fileID: 2582644621853843156}
   - component: {fileID: 8853848475026248795}
@@ -169,6 +170,23 @@ MonoBehaviour:
   _sizeRange: {x: 0.5, y: 1}
   _stopTimeRange: {x: 0.5, y: 1}
   startPos: {x: 0, y: 0, z: 0}
+--- !u!114 &8810058064910811694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3642781108012472835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f016365407057c440bc27df737f370e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startHealth: 1
+  _killDelayTime: 0
+  DemageTaken:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3316188960480554435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cb0c217064cf747b385fd91187bb19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DraggedObject: {fileID: 0}
 --- !u!114 &8853848475026248795
 MonoBehaviour:
   m_ObjectHideFlags: 0

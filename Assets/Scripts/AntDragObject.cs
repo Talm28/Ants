@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AntDragObject : MonoBehaviour
 {
-    private GameObject _draggedObject;
+    public GameObject DraggedObject;
     private AntMovement _antMovement;
     private AntState _antState;
 
@@ -21,11 +21,11 @@ public class AntDragObject : MonoBehaviour
     {
         if(_antState.State == MovementState.Returning)
         {
-            _draggedObject.transform.position = transform.position;
+            DraggedObject.transform.position = transform.position;
             if(Vector3.Distance(_antMovement.startPos, transform.position) < 0.1f)
             {
                 // TODO - Add function for ant cake retrieve
-                Destroy(_draggedObject.gameObject);
+                Destroy(DraggedObject.gameObject);
                 Destroy(this.gameObject);
             }
         }
@@ -33,6 +33,6 @@ public class AntDragObject : MonoBehaviour
 
     public void Drag(GameObject draggedObject)
     {
-        _draggedObject = draggedObject;
+        DraggedObject = draggedObject;
     }
 }

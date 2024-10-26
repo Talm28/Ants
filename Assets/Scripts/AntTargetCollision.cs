@@ -7,9 +7,9 @@ public class AntTargetCollision : MonoBehaviour
     private AntMovement _antMovement;
     private AntDragObject _andDragObject;
     private AntState _antState;
-    private bool _tookCake;
+    private AntHealth _antHealth;
 
-    private GameObject _draggedCake;
+    private bool _tookCake;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,7 @@ public class AntTargetCollision : MonoBehaviour
         _antMovement = GetComponent<AntMovement>();
         _andDragObject = GetComponent<AntDragObject>();
         _antState = GetComponent<AntState>();
+        _antHealth = GetComponent<AntHealth>();
 
         _tookCake = false;
     }
@@ -40,18 +41,12 @@ public class AntTargetCollision : MonoBehaviour
                 cakeController.TakeCake();
                 _antMovement.ReturnToStart(_antMovement.startPos);
                 _andDragObject.Drag(other.gameObject);
-                _draggedCake = other.gameObject;
             }
         }
         else if(other.gameObject.tag == "Bullet") // Bullet collision
         {
             Destroy(other.gameObject);
-            if(_draggedCake != null) // If ant has cake release it
-            {
-                CakeController cakeController = _draggedCake.gameObject.GetComponent<CakeController>();
-                if(cakeController != null) cakeController.ReleaseCake();
-            }
-            Destroy(this.gameObject);
+            _antHealth.TakeHealth();
         }
     }
 }
