@@ -4842,6 +4842,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Speedy_regular Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3642781108012472835, guid: 632d3ff9b4d4f964f9364dd84a1e9b69, type: 3}
+      propertyPath: m_TagString
+      value: Speedy ant
+      objectReference: {fileID: 0}
     - target: {fileID: 4751011318885771235, guid: 632d3ff9b4d4f964f9364dd84a1e9b69, type: 3}
       propertyPath: m_Sprite
       value: 

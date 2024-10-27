@@ -8,6 +8,9 @@ TagManager:
   - Cake
   - Bullet
   - AntSpawner
+  - Speedy ant
+  - Angry ant
+  - Score manager
   layers:
   - Default
   - TransparentFX
