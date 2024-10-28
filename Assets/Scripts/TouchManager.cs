@@ -14,7 +14,7 @@ public class TouchManager : MonoBehaviour
     private InputAction _touchPressAction;
 
     [SerializeField] CannonMovement _cannonMovement;
-    [SerializeField] BulletSpawner _bullerSpawner;
+    [SerializeField] BulletSpawner _bulletSpawner;
 
     private void Awake()
     {
@@ -51,6 +51,6 @@ public class TouchManager : MonoBehaviour
         _cannonMovement.Rotate(wordPosition);
 
         // Spawn bullet
-        _bullerSpawner.SpawnBullet(wordPosition);
+        _bulletSpawner.SpawnBullet(wordPosition);
     }
 }
