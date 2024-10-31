@@ -21,6 +21,7 @@ public class CannonBarController : MonoBehaviour
 
         _slider.maxValue = _shotAmount;
         _slider.value = _slider.maxValue;
+        UpdateText();
         _timer = 0;
     }
 

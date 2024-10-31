@@ -39,7 +39,7 @@ public class AntHealth : MonoBehaviour
 
     private void KillAnt()
     {
-        GameObject draggedObject = _antDragObject.DraggedObject;
+        GameObject draggedObject = _antDragObject.draggedObject;
         if(draggedObject != null) // If ant has cake release it
         {
             CakeController cakeController = draggedObject.gameObject.GetComponent<CakeController>();

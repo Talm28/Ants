@@ -5,15 +5,18 @@ using UnityEngine;
 
 public class AntDragObject : MonoBehaviour
 {
-    public GameObject DraggedObject;
+
+    public GameObject draggedObject;
     private AntMovement _antMovement;
     private AntState _antState;
+    private GameManager _gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
         _antMovement = GetComponent<AntMovement>();
         _antState = GetComponent<AntState>();
+        _gameManager = GameObject.FindGameObjectWithTag("Game manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -21,18 +24,22 @@ public class AntDragObject : MonoBehaviour
     {
         if(_antState.State == MovementState.Returning)
         {
-            DraggedObject.transform.position = transform.position;
+            draggedObject.transform.position = transform.position;
             if(Vector3.Distance(_antMovement.startPos, transform.position) < 0.1f)
-            {
-                // TODO - Add function for ant cake retrieve
-                Destroy(DraggedObject.gameObject);
-                Destroy(this.gameObject);
-            }
+                RetrieveCake();
         }
+    }
+
+    private void RetrieveCake()
+    {
+        _gameManager.CakeRetrive();
+        
+        Destroy(draggedObject.gameObject);
+        Destroy(this.gameObject);
     }
 
     public void Drag(GameObject draggedObject)
     {
-        DraggedObject = draggedObject;
+        this.draggedObject = draggedObject;
     }
 }

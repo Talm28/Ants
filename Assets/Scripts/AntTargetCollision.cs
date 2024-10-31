@@ -38,9 +38,9 @@ public class AntTargetCollision : MonoBehaviour
             if(cakeController != null && !cakeController.isTaken && _antState.State == MovementState.CakeTargeted) // Check if the cake is avaiable and took it if so
             {
                 cakeController.onCakeTook.RemoveListener(_antMovement.ActiveWondering); // Remove the current ant from cake event
+                _andDragObject.Drag(other.gameObject);
                 cakeController.TakeCake();
                 _antMovement.ReturnToStart(_antMovement.startPos);
-                _andDragObject.Drag(other.gameObject);
             }
         }
         else if(other.gameObject.tag == "Bullet") // Bullet collision
