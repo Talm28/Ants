@@ -92,7 +92,7 @@ public class AntMovement : MonoBehaviour
 
         if(targetGameObject != null)
         {
-            CakeController cakeController = targetGameObject.GetComponent<CakeController>();
+            CakeController cakeController = targetGameObject!.GetComponent<CakeController>();
             if(cakeController != null) // If the target is Cake
             {
                 cakeController.onCakeTook.AddListener(ActiveWondering);

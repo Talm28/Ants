@@ -22,10 +22,12 @@ public class TouchManager : MonoBehaviour
 
         _playerInput = GetComponent<PlayerInput>();
 
-        _mainCamera = Camera.main;
-
         _touchPositionAction = _playerInput.actions["TouchPosition"];
         _touchPressAction = _playerInput.actions["TouchPress"];
+    }
+
+    private void Start() {
+        _mainCamera = Camera.main;
     }
 
     // Subscribe to the touch event

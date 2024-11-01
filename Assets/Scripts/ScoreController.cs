@@ -12,18 +12,18 @@ public class ScoreController : MonoBehaviour
     [SerializeField] private int _speedyAntscore;
     [SerializeField] private int _angryAntScore;
 
-    private int _score;
+    public int Score {get; private set;}
 
     // Start is called before the first frame update
     void Start()
     {
-        _score = 0;
+        Score = 0;
         UpdateScore();
     }
 
     public void AddScore(int score)
     {
-        _score += score;
+        Score += score;
         UpdateScore();
     }
     public void AddScore(GameObject gameObject)
@@ -31,13 +31,13 @@ public class ScoreController : MonoBehaviour
         switch(gameObject.tag)
         {
             case "Ant":
-                _score += _antScore;
+                Score += _antScore;
                 break;
             case "Speedy ant":
-                _score += _speedyAntscore;
+                Score += _speedyAntscore;
                 break;
             case "Angry ant":
-                _score += _angryAntScore;
+                Score += _angryAntScore;
                 break;
         }
         UpdateScore();
@@ -45,6 +45,6 @@ public class ScoreController : MonoBehaviour
 
     private void UpdateScore()
     {
-        _scoreText.text = _score.ToString();
+        _scoreText.text = Score.ToString();
     }
 }
