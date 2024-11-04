@@ -51,7 +51,8 @@ public class AntSpawner : MonoBehaviour
             {
                 _timer = 0;
                 SpawnAnts();
-                _timeToSpawn -= 0.01f;
+                if(_timeToSpawn > 0.9f)
+                    _timeToSpawn -= 0.01f;
             }
         }
     }
