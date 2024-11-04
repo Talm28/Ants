@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 86465353}
   - component: {fileID: 86465351}
   - component: {fileID: 86465354}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RightCake
   m_TagString: Cake
   m_Icon: {fileID: 0}
@@ -828,7 +828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 697894371}
   - component: {fileID: 697894370}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RightCakeSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1198,7 +1198,7 @@ GameObject:
   - component: {fileID: 840690707}
   - component: {fileID: 840690705}
   - component: {fileID: 840690708}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LeftCake
   m_TagString: Cake
   m_Icon: {fileID: 0}
@@ -2633,7 +2633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2033255772}
   - component: {fileID: 2033255771}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LeftCakeSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
