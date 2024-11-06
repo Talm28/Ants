@@ -49,6 +49,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BG
+    uniqueID: 664708455
+    locked: 0
   - name: Ant
     uniqueID: 840441747
     locked: 0
