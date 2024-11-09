@@ -2759,10 +2759,11 @@ MonoBehaviour:
   - {fileID: 3642781108012472835, guid: 632d3ff9b4d4f964f9364dd84a1e9b69, type: 3}
   - {fileID: 5209747943854629225, guid: 126845ed1483d84418b225439b015ab4, type: 3}
   - {fileID: 4750127770562102229, guid: b085ccd9d829c0e4ebc9f32519b3abe2, type: 3}
-  _speedyAntProb: 3
-  _angryAntProb: 5
-  _startTimeTospawn: 2
+  _speedyAntProb: 5
+  _angryAntProb: 8
+  _startTimeTospawn: 1.5
   _timeToSpawn: 2
+  _timeToUpdateSpawnTime: 1
   _cakePool: []
   onCakePoolRefill:
     m_PersistentCalls:

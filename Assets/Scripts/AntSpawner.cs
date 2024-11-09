@@ -9,12 +9,14 @@ public class AntSpawner : MonoBehaviour
     [SerializeField] private GameObject[] _ants = new GameObject[2];
     [SerializeField] private int _speedyAntProb;
     [SerializeField] private int _angryAntProb;
-    [SerializeField] private int _startTimeTospawn;
+    [SerializeField] private float _startTimeTospawn;
     [SerializeField] private float _timeToSpawn;
+    [SerializeField] private float _timeToUpdateSpawnTime;
 
     [SerializeField] private List<GameObject> _cakePool;
     public UnityEvent onCakePoolRefill;
     private bool _isActive;
+    private float _spawnTimer;
     private float _timer;
     private Camera _cameraMain;
     private System.Random _rnd;
@@ -33,6 +35,8 @@ public class AntSpawner : MonoBehaviour
         _rnd = new System.Random();
 
         _timeToSpawn = _startTimeTospawn;
+        _spawnTimer = 0;
+        _timer = 0;
 
         _isActive = true;
 
@@ -45,14 +49,20 @@ public class AntSpawner : MonoBehaviour
     {
         if(_isActive)
         {
+            _spawnTimer += Time.deltaTime;
             _timer += Time.deltaTime;
 
-            if(_timer > _timeToSpawn)
+            if(_spawnTimer > _timeToSpawn)
+            {
+                _spawnTimer = 0;
+                SpawnAnts();
+            }
+
+            if(_timer > _timeToUpdateSpawnTime)
             {
                 _timer = 0;
-                SpawnAnts();
-                if(_timeToSpawn > 0.9f)
-                    _timeToSpawn -= 0.01f;
+                if(_timeToSpawn > 1f)
+                    _timeToSpawn -= 0.005f;
             }
         }
     }
