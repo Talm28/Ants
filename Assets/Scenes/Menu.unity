@@ -784,8 +784,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scoreText: {fileID: 801260883}
-  _antsNumber: 1
-  _ant: {fileID: 3642781108012472835, guid: 632d3ff9b4d4f964f9364dd84a1e9b69, type: 3}
 --- !u!4 &675749557
 Transform:
   m_ObjectHideFlags: 0
@@ -835,7 +833,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -300}
+  m_AnchoredPosition: {x: 0, y: -250}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &676149272
